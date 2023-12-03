@@ -3,19 +3,14 @@ package com.example.demo.repository;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.model.UrlModel;
+
 @Repository
-public class ConvertRepo {
-	
-	public Map<String, String> repo=new HashMap<>();
-	
-	public void add(String oldUrl, String newUrl) {
-		repo.put(oldUrl, newUrl);
-	}
-	
-	public Map<String, String> getRepo() {
-		return repo;
-	}
+public interface ConvertRepo extends CrudRepository<UrlModel, Integer> {
+
+	public UrlModel findByShortURL(String url);
 
 }

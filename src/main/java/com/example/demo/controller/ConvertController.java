@@ -30,23 +30,11 @@ public class ConvertController {
 	}
 	
 	
-	private String extractURLFromJson(String jsonResponse) throws JsonMappingException, JsonProcessingException {		
-		 ObjectMapper map=new ObjectMapper();
-		 JsonNode jsonNode = map.readTree(jsonResponse);
-		 JsonNode node = jsonNode.get("url");
-		 System.out.println("node: "+node);		 
-		 return node.toString();
-		
-	    }
-	
 	@GetMapping("/fetch/{url}")
-	public ResponseEntity<?> getURL(@PathVariable("url") String url) throws Exception {
-		
-		
-		String fetchURL = convertService.fetchURL(url);	
-		
+	public ResponseEntity<?> getURL(@PathVariable("url") String url) throws Exception {		
+		String fetchURL = convertService.fetchURL(url);			
 		System.out.println("Before extraction: "+fetchURL);
-		String extractURLFromJson = extractURLFromJson(fetchURL);	
+		String extractURLFromJson = convertService.extractURLFromJson(fetchURL);	
 		String substring = extractURLFromJson.substring(1, extractURLFromJson.length()-1);
 		System.out.println("After extraction: "+substring);
 		
